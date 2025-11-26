@@ -1,57 +1,62 @@
 "use server";
 
-import { db } from "../db/drizzle";
-import {  user } from "../db/schema";
-import { auth } from "../lib/auth";
 import { eq, inArray, not } from "drizzle-orm";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
+import { db } from "../db/drizzle";
+import {  user } from "../db/schema";
+import { auth } from "../lib/auth";
 
-   
+
 export const signIn = async (email: string, password: string) => {
-    try {
-        await auth.api.signInEmail({
-            body: {
-                email:"josephukohaobasi@gmail.com",
-                password:"password123"
-            }
-        })
+  try {
+    await auth.api.signInEmail({
+      body: {
+        email,
+        password,
+      },
+    });
 
-        return {
-            success: true,
-            message: "Signed in successfully."
-        }
-    } catch (error) {
-        const e = error as Error
+    return {
+      success: true,
+      message: "Signed in successfully.",
+    };
+  } catch (error) {
+    const e = error as Error;
 
-        return {
-            success: false,
-            message: e.message || "An unknown error occurred."
-        }
-    }
-}
+    return {
+      success: false,
+      message: e.message || "An unknown error occurred.",
+    };
+  }
+};
 
-export const signUp = async (email: string, password: string, username: string) => {
-    try {
-        await auth.api.signUpEmail({
-            body: {
-                email:"josephukohaobasi@gmail.com",
-                password:"password123",
-                name:"joseph ukoha obasi"
-            }
-        })
+export const signUp = async (
+  email: string,
+  password: string,
+  username: string
+) => {
+  try {
+    await auth.api.signUpEmail({
+      body: {
+        email,
+        password,
+        name: username,
+      },
+    });
 
-        return {
-            success: true,
-            message: "Signed up successfully."
-        }
-    } catch (error) {
-        const e = error as Error
+    return {
+      success: true,
+      message: "Signed up successfully.",
+    };
+  } catch (error) {
+    const e = error as Error;
 
-        return {
-            success: false,
-            message: e.message || "An unknown error occurred."
-        }
-    }
-}
+    return {
+      success: false,
+      message: e.message || "An unknown error occurred.",
+    };
+  }
+};
+
 
