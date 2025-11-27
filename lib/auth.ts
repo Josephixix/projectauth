@@ -3,7 +3,12 @@ import { schema } from "../db/schema";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
- 
+import { Resend } from "resend";
+import ForgotPasswordEmail from "@/components/emails/reset-password";
+
+
+ const resend = new Resend(process.env.RESEND_API_KEY as string );
+
 
 export const auth = betterAuth({
 
@@ -13,8 +18,21 @@ export const auth = betterAuth({
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string, 
         }, 
     },
-     emailAndPassword: { 
-    enabled: true, 
+    emailAndPassword: {
+    enabled: true,
+    sendResetPassword: async ({ user, url }) => {
+      await resend.emails.send({
+        from: "Acme <no-reply@resend.dev>",
+        to: user.email,
+        subject: "Reset your password",
+        react: ForgotPasswordEmail({ 
+          username: user.name,
+          resetUrl: url,
+          userEmail: user.email,
+        }),
+      });
+    },
+    requireEmailVerification: true,
   },
     database: drizzleAdapter(db, {
         provider: "pg", 
