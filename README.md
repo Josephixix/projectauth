@@ -1,3 +1,50 @@
+Auth & Database Starter Template
+
+A modern, production-ready starter kit featuring Better Auth, Drizzle ORM, Google OAuth, Resend email, and Neon PostgreSQL.
+Designed to help developers skip boilerplate setup and jump straight into building.
+
+## Features
+🔐 Better Auth (secure, modern authentication)
+
+🔑 Google OAuth login with a plug-and-play setup
+
+🛢️ Drizzle ORM integrated with Neon (PostgreSQL)
+
+📧 Resend for sending emails (password reset, verification, etc.)
+
+🧩 Clean and extendable folder structure
+
+⚙️ A complete, ready-to-use auth flow
+
+⚡ Optimized for Next.js / modern frameworks
+
+🛠️ Fully typed (TypeScript)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
